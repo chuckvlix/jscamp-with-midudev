@@ -43,17 +43,18 @@
         <div class="search-input">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
 
-          <input required type="text" placeholder="Buscar trabajos, empresas o habilidades">
+          <input id="jobs-search-input" required type="text" placeholder="Buscar trabajos, empresas o habilidades">
         </div>
 
         <div class="search-filters">
-          <select name="tech" id="filter-technology">
+          <select name="technology" id="filter-technology">
             <option value="">Tecnología</option>
             <option value="javascript">JavaScript</option>
             <option value="python">Python</option>
             <option value="react">React</option>
             <option value="nodejs">Node.js</option>
           </select>
+
           <select name="location" id="filter-location">
             <option value="">Ubicación</option>
             <option value="remote">Remoto</option>
@@ -62,13 +63,8 @@
             <option value="madrid">Madrid</option>
             <option value="barcelona">Barcelona</option>
           </select>
-          <select name="contract" id="">
-            <option value="">Tipo de contrato</option>
-            <option value="full-time">Tiempo completo</option>
-            <option value="part-time">Tiempo parcial</option>
-            <option value="freelance">Freelance</option>
-          </select>
-          <select name="experience" id="">
+
+          <select name="experience" id="filter-experience">
             <option value="">Nivel de experiencia</option>
             <option value="junior">Junior</option>
             <option value="mid">Mid-level</option>
@@ -84,7 +80,7 @@
     <section>
       <h3>Resultados de búsqueda</h3>
       <div class="job-listings">
-        <article class="job-description" data-location="remote" data-technology="react javascript">
+        <article class="job-description-card" data-location="remote" data-technology="react">
           <div>
             <h3>Desarrollador de Software Senior</h3>
             <small>Tech Solutions Inc. | Remoto</small>
@@ -94,7 +90,7 @@
             <a href="details.html">Aplicar</a>
           </button>
         </article>
-        <article class="job-description" data-location="madrid" data-technology="javascript">
+        <article class="job-description-card" data-location="madrid" data-technology="javascript">
           <div>
             <h3>Desarrollador Frontend</h3>
             <small>Innovatech | Madrid</small>
@@ -102,7 +98,7 @@
           </div>
           <button class="btn-apply-job">Aplicar</button>
         </article>
-        <article class="job-description" data-location="buenos-aires" data-technology="nodejs">
+        <article class="job-description-card" data-location="buenos-aires" data-technology="nodejs">
           <div>
             <h3>Ingeniero DevOps</h3>
             <small>CloudNet Services | Buenos Aires</small>
@@ -110,6 +106,14 @@
           </div>
           <button class="btn-apply-job">Aplicar</button>
         </article>
+
+        <article class="job-description-card" data-location="santiago" data-technology="python">
+          <div>
+            <h3>Desarrollador Backend Python</h3>
+            <small>DataWorks | Santiago</small>
+            <p>Estamos buscando un desarrollador backend con experiencia en Python y frameworks como Django o Flask. El candidato ideal debe tener habilidades para trabajar con bases de datos y APIs RESTful.</p>
+          </div>
+          <button class="btn-apply-job">Aplicar</button>
       </div>
 
       <nav class="pagination">
