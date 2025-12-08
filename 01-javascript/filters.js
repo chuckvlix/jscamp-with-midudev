@@ -31,3 +31,18 @@ filterLocation?.addEventListener('change', () => {
     job.classList.toggle('is-hidden', !isShow)
   })
 })
+
+
+// Filtrado de trabajos por nivel de experiencia
+const filterExperience = document.querySelector('#filter-experience')
+
+filterExperience?.addEventListener('change', () => {
+  const jobs = document.querySelectorAll('.job-description-card')
+  const selectExperience = filterExperience.value
+
+  jobs.forEach(job => {
+    const jobExperience = job.getAttribute('data-experience')
+    const isShow = selectExperience === '' || jobExperience === selectExperience
+    job.classList.toggle('is-hidden', !isShow)
+  })
+})
