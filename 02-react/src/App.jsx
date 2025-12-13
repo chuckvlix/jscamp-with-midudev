@@ -1,7 +1,7 @@
-import Navbar from "./components/Navbar"
-import JobsSearchSection from "./components/JobsSearchSection"
-import SearchResultsSection from "./components/SearchResultsSection"
-import Footer from "./components/Footer"
+import Navbar from "./components/Navbar.jsx"
+import JobsSearchSection from "./components/JobsSearchSection.jsx"
+import SearchResultsSection from "./components/SearchResultsSection.jsx"
+import Footer from "./components/Footer.jsx"
 
 function App() {
 

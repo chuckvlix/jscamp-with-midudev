@@ -1,4 +1,5 @@
-import JobCard from './JobCard'
+import JobCard from './JobCard.jsx'
+import Pagination from './Pagination.jsx'
 
 function SearchResultsSection() {
   return (
@@ -20,16 +21,7 @@ function SearchResultsSection() {
           data={{ location: 'buenos-aires', technology: 'node', experiencia: 'mid' }}
         />
       </div>
-
-      <nav className="pagination">
-        <a href="#">&lt;</a>
-        <a className="is-active" href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">&gt;</a>
-      </nav>
+      <Pagination currentPage={1} totalPages={7} />
     </section>
   )
 }
