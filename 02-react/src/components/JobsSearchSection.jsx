@@ -28,7 +28,7 @@ const useSearchForm = ({ idText, idTechnology, idLocation, idExperience, onSearc
   }
 }
 
-function JobsSearchSection( { onTextFilter, onSearch } ) {
+function JobsSearchSection( { onTextFilter, onSearch, handleClearFilters } ) {
   const idText = useId()
   const idTechnology = useId()
   const idLocation = useId()
@@ -82,6 +82,8 @@ function JobsSearchSection( { onTextFilter, onSearch } ) {
             <option value="mid-level">Mid-level</option>
             <option value="senior">Senior</option>
           </select>
+
+          <button className="btn-reset" type="reset" onClick={handleClearFilters}>Borrar filtros</button>
         </div>
 
         <p id="message"></p>

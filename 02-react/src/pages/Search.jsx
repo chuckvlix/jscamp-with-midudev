@@ -17,6 +17,16 @@ const useFilters = () => {
   const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(true)
 
+  const handleClearFilters = () => {
+    setFilters({
+      technology: '',
+      location: '',
+      experience: ''
+    })
+    setTextToFilter('')
+    setCurrentPage(1)
+  }
+
   useEffect(() => {
     async function fetchJobs() {
       try {
@@ -68,6 +78,7 @@ const useFilters = () => {
     loading,
     handleSearch,
     handleTextFilter,
+    handleClearFilters,
     currentPage,
     setCurrentPage
   }
@@ -81,12 +92,13 @@ export function SearchPage() {
     setCurrentPage,
     handleSearch,
     handleTextFilter,
+    handleClearFilters
   } = useFilters()
 
   return (
     <>
       <main className="jobs">
-        <JobsSearchSection onSearch={handleSearch} onTextFilter={handleTextFilter} />
+        <JobsSearchSection onSearch={handleSearch} onTextFilter={handleTextFilter} handleClearFilters={handleClearFilters} />
         {
           loading
             ? <p>Cargando empleos...</p>

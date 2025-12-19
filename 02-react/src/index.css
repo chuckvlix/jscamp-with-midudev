@@ -403,6 +403,28 @@ article {
   }
 }
 
+.btn-reset {
+  padding: 0.625rem 1.25rem;
+    background-color: #242d3a;
+    border: 0;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: all 0.2s;
+    appearance: none;
+
+    &:hover {
+      background-color: var(--primary-hover);
+      color: white;
+    }
+
+    &:focus {
+      outline: 2px solid #1173d4;
+      outline-offset: 2px;
+    }
+}
+
 .jobs > section:nth-child(2) {
   padding: 0;
 
