@@ -1,12 +1,19 @@
 import { useId, useState } from "react"
 
+let timeoutId = null
+
 const useSearchForm = ({ idText, idTechnology, idLocation, idExperience, onSearch, onTextFilter }) => {
   const [searchText, setSearchText] = useState('')
-    const handleSubmit = (event) => {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget)
 
-    const filters = {
+  const handleSubmit = (event) => {
+  event.preventDefault()
+  const formData = new FormData(event.currentTarget)
+
+  if (event.target.name === idText) {
+    return // Evita que se ejecute la búsqueda completa al escribir en el input de texto
+  }
+
+  const filters = {
       search: formData.get(idText),
       technology: formData.get(idTechnology),
       location: formData.get(idLocation),
@@ -17,8 +24,16 @@ const useSearchForm = ({ idText, idTechnology, idLocation, idExperience, onSearc
 
   const handleTextChange = (event) => {
     const text = event.target.value
-    setSearchText(text)
-    onTextFilter(text)
+    setSearchText(text) // Actualiza el input inmediatamente
+
+    // Debounce: Cancelar el timeout anterior
+    if (timeoutId) {
+      clearTimeout(timeoutId)
+    }
+    // Configurar un nuevo timeout
+    timeoutId = setTimeout(() => {
+      onTextFilter(text)
+    }, 500) // Espera 500ms después de que el usuario deja de escribir
   }
 
   return {

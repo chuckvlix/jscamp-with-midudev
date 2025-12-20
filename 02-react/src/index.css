@@ -425,14 +425,11 @@ article {
     }
 }
 
-.jobs > section:nth-child(2) {
-  padding: 0;
-
-  h3 {
+.jobs h2 {
     font-size: 1.75rem;
     text-align: center;
+    margin-bottom: 1.5rem;
   }
-}
 
 .jobs > section:nth-child(2) div h3 {
   text-align: start;

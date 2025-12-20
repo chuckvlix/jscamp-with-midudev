@@ -83,6 +83,7 @@ const useFilters = () => {
     setCurrentPage
   }
 }
+
 export function SearchPage() {
   const {
     loading,
@@ -106,6 +107,7 @@ export function SearchPage() {
       <meta name="description" content="Explora miles de oportunidades laborales en el sector tecnológico. Encuentra tu próximo empleo en DevJobs." />
       <main className="jobs">
         <JobsSearchSection onSearch={handleSearch} onTextFilter={handleTextFilter} handleClearFilters={handleClearFilters} />
+        <h2>Resultados de búsqueda</h2>
         {
           loading
             ? <p>Cargando empleos...</p>
