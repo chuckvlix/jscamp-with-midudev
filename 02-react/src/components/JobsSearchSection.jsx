@@ -3,7 +3,7 @@ import { useId, useState, useRef } from "react"
 const useSearchForm = ({ idText, idTechnology, idLocation, idExperience, onSearch, onTextFilter }) => {
   const timeoutId = useRef(null) // Referencia para almacenar el ID del timeout, qye persiste entre renderisados
   const [searchText, setSearchText] = useState('')
-  
+
   const handleSubmit = (event) => {
   event.preventDefault()
   const formData = new FormData(event.currentTarget)
@@ -42,7 +42,7 @@ const useSearchForm = ({ idText, idTechnology, idLocation, idExperience, onSearc
   }
 }
 
-function JobsSearchSection( { onTextFilter, onSearch, handleClearFilters } ) {
+function JobsSearchSection( { onTextFilter, onSearch, initialText, handleClearFilters } ) {
   const idText = useId()
   const idTechnology = useId()
   const idLocation = useId()
@@ -66,6 +66,7 @@ function JobsSearchSection( { onTextFilter, onSearch, handleClearFilters } ) {
             name={idText}
             id="jobs-search-input"
             type="text"
+            defaultValue={initialText}
             placeholder="Buscar empleos por título, tecnología o empresa"
             onChange={handleTextChange}
           />
