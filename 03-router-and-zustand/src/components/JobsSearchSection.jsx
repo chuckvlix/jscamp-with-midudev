@@ -1,0 +1,110 @@
+import { useId, useState, useRef } from "react"
+
+const useSearchForm = ({ idText, idTechnology, idLocation, idExperience, onSearch, onTextFilter }) => {
+  const timeoutId = useRef(null) // Referencia para almacenar el ID del timeout, qye persiste entre renderisados
+  const [searchText, setSearchText] = useState('')
+
+  const handleSubmit = (event) => {
+  event.preventDefault()
+  const formData = new FormData(event.currentTarget)
+
+  if (event.target.name === idText) {
+    return // Evita que se ejecute la búsqueda completa al escribir en el input de texto
+  }
+
+  const filters = {
+      search: formData.get(idText),
+      technology: formData.get(idTechnology),
+      location: formData.get(idLocation),
+      experience: formData.get(idExperience),
+    }
+    onSearch(filters)
+  }
+
+  const handleTextChange = (event) => {
+    const text = event.target.value
+    setSearchText(text) // Actualiza el input inmediatamente
+
+    // Debounce: Cancelar el timeout anterior
+    if (timeoutId.current) {
+      clearTimeout(timeoutId.current)
+    }
+    // Configurar un nuevo timeout
+    timeoutId.current = setTimeout(() => {
+      onTextFilter(text)
+    }, 500) // Espera 500ms después de que el usuario deja de escribir
+  }
+
+  return {
+    searchText,
+    handleSubmit,
+    handleTextChange
+  }
+}
+
+function JobsSearchSection( { onTextFilter, onSearch, initialText, handleClearFilters } ) {
+  const idText = useId()
+  const idTechnology = useId()
+  const idLocation = useId()
+  const idExperience = useId()
+
+  const {
+    handleSubmit,
+    handleTextChange
+  } = useSearchForm({ idText, idTechnology, idLocation, idExperience, onSearch, onTextFilter })
+
+  return (
+    <section className="jobs-search">
+      <h1>Encuentra tu próximo trabajo</h1>
+      <p>Explora miles de oportunidades en el sector tecnológico.</p>
+
+      <form onChange={handleSubmit} role="search">
+        <div className="search-input">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
+
+          <input
+            name={idText}
+            id="jobs-search-input"
+            type="text"
+            defaultValue={initialText}
+            placeholder="Buscar empleos por título, tecnología o empresa"
+            onChange={handleTextChange}
+          />
+        </div>
+
+        <div className="search-filters">
+          <select name={idTechnology} id="filter-technology">
+            <option value="">Tecnología</option>
+            <option value="mobile">Mobile</option>
+            <option value="javascript">JavaScript</option>
+            <option value="python">Python</option>
+            <option value="react">React</option>
+            <option value="node">Node.js</option>
+          </select>
+
+          <select name={idLocation} id="filter-location">
+            <option value="">Ubicación</option>
+            <option value="remoto">Remoto</option>
+            <option value="buenos-aires">Buenos Aires</option>
+            <option value="santiago">Santiago</option>
+            <option value="madrid">Madrid</option>
+            <option value="barcelona">Barcelona</option>
+          </select>
+
+          <select name={idExperience} id="filter-experience">
+            <option value="">Nivel de experiencia</option>
+            <option value="junior">Junior</option>
+            <option value="mid-level">Mid-level</option>
+            <option value="senior">Senior</option>
+          </select>
+
+          <button className="btn-reset" type="reset" onClick={handleClearFilters}>Borrar filtros</button>
+        </div>
+
+        <p id="message"></p>
+      </form>
+    </section>
+  )
+}
+
+export default JobsSearchSection
