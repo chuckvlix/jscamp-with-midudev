@@ -1,5 +1,5 @@
 import { NavLink } from "react-router"
-import { useAuth } from "../context/AuthContext"
+import { useAuthStore } from "../store/authStore.js"
 import { Link } from "./Link.jsx"
 
 export function Navbar() {
@@ -30,7 +30,7 @@ export function Navbar() {
 }
 
 const NavbarUserButton = () => {
-  const { isLoggedIn, login, logout } = useAuth()
+  const { isLoggedIn, login, logout } = useAuthStore()
 
   return isLoggedIn
     ? <button onClick={logout}>Cerrar sesión</button>
