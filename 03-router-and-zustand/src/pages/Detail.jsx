@@ -4,6 +4,7 @@ import { Link } from "../components/Link.jsx"
 import snarkdown from "snarkdown"
 import styles from "./Detail.module.css"
 import { useAuthStore } from "../store/authStore.js"
+import { useFavoritesStore } from "../store/favoritesStore.js"
 
 function JobSection({ title, content }) {
   const html = snarkdown(content)
@@ -51,6 +52,7 @@ function DetailPageHeader({ job }) {
       </header>
 
       <DetailApplyButton />
+      <DetailFavoriteButton jobId={job.id} />
     </>
   )
 }
@@ -58,9 +60,26 @@ function DetailPageHeader({ job }) {
 function DetailApplyButton() {
   const {isLoggedIn} = useAuthStore()
   return (
-      <button disabled={!isLoggedIn} className={styles.applyButton}>
+      <button
+        disabled={!isLoggedIn}
+        className={styles.applyButton}
+      >
         {isLoggedIn ? 'Aplicar ahora' : 'Inicia sesión para aplicar'}
       </button>
+  )
+}
+
+function DetailFavoriteButton ({ jobId }) {
+  const {isLoggedIn} = useAuthStore()
+  const { isFavorite, toggleFavorite } = useFavoritesStore()
+
+  return (
+    <button
+      disabled={!isLoggedIn}
+      onClick={() => toggleFavorite(jobId)}
+    >
+      {isFavorite(jobId) ? '❤️' : '🤍'}
+    </button>
   )
 }
 

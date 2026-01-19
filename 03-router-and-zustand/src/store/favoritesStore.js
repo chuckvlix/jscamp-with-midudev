@@ -3,12 +3,13 @@ import { create } from 'zustand'
 export const useFavoritesStore = create((set, get) => ({
   // Estado
   favorites: [],
+
   // Acciones
   addFavorite: (jobId) => {
     set((state) => ({
       favorites: state.favorites.includes(jobId)
         ? state.favorites
-        : [...state.favorites]
+        : [...state.favorites, jobId]
     }))
   },
 
